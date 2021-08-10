@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>marker.js Live manual testing</title>
+  <script src="https://cdn.jsdelivr.net/npm/markerjs2@2.11.1/markerjs2.js"></script>
+  <script>
+    function showMarkerArea() {
+      const markerArea = new markerjs2.MarkerArea(document.getElementById('testImage1'));
+      markerArea.uiStyleSettings.notesButtonVisible = true;
+
+      markerArea.addRenderEventListener((dataUrl, state) => {
+        document.getElementById('markerAreaState').value = JSON.stringify(state);
+        document.getElementById('resultImage').src = dataUrl;
+      });
+      markerArea.show();
+
+      const stateText = document.getElementById('markerAreaState').value;
+      if (stateText !== undefined && stateText.trim() !== '') {
+        markerArea.restoreState(JSON.parse(stateText));
+      }
+    }
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: blue;
+      font-size: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <img src="images/landscape_sm.jpg" class="img" style="max-width: 50%;" id="testImage1" />
+    <br />
+
+    <button onclick="showMarkerArea()">edit markers</button>
+    <button id="closeViewButton">close</button>
+
+    <textarea id="markerAreaState" style="width: 100%; max-width: 800px; height: 300px;"></textarea>
+
+    <img id="resultImage" />
+
+  </div>
+</body>
+</html>
