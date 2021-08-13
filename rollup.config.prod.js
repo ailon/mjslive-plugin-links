@@ -7,7 +7,7 @@ import generatePackageJson from 'rollup-plugin-generate-package-json';
 import copy from 'rollup-plugin-copy';
 
 const outputDir = './dist/';
-const globalName = pkg.name; // replace if your package name is not compatible
+const globalName = 'mjslPluginLinks'; //pkg.name; // replace if your package name is not compatible
 
 const banner = `/* **********************************
 ${pkg.name} version ${pkg.version}
